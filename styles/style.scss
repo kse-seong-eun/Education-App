@@ -1,96 +1,104 @@
+@mixin menuBtn($bgColor, $borderColor, $fontColor) {
+  background-color: $bgColor;
+  border: 1px solid $borderColor;
+
+  border-radius: 20px;
+  height: 30px;
+  max-width: 300px;
+  min-width: 30px;
+  flex: 1 1 auto;
+  // flex-grow, flex-shrink, flex-basis
+  margin-left: 10px;
+  margin-bottom: 10px;
+  line-height: 2.8;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: 600;
+  color: $fontColor;
+  @content;
+}
+@mixin articleBox($bgColor, $borderColor) {
+  font-family: "Libre Baskerville", serif;
+  background-color: $bgColor;
+  border: 1px solid $borderColor;
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 20px;
+  width: 180px;
+  height: 180px;
+  padding: 15px;
+  margin: 5px;
+  font-size: 24px;
+  @content;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  // color: rgba(255, 255, 255, 0.87);
+  // background-color: #242424;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
 body {
+  padding: 0px;
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
+.backGround {
+  position: relative;
+  width: 390px;
+  height: 844px;
+  .menu {
+    position: sticky;
+    top: 0;
+    left: 0;
+    // width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: 140px;
+    flex-wrap: wrap;
+    overflow: hidden;
+    padding: 10px 0;
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #f7df1eaa);
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+    background-color: rgb(0, 47, 255);
+    .menu__button {
+      @include menuBtn(#000000, #ffffff, #ffffff);
+    }
   }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+  .article {
+    position: absolute;
+    top: 50px;
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-flow: row;
+    background-color: rgb(66, 255, 132);
+    .article__box {
+      @include articleBox(#0a6846, #ffffff);
+      .article__box__bottom {
+        position: absolute;
+        bottom: 15px;
+        width: 148px;
+        display: flex;
+        justify-content: space-between;
+        background-color: rgb(173, 54, 54);
+        // box-sizing: border-box;
+        .article__box__info {
+          font-size: 12px;
+          height: fit-content;
+          padding: 10px;
+          // box-sizing: border-box;
+          border-radius: 20px;
+          border: 1px solid black;
+          background-color: lightcoral;
+        }
+      }
+    }
   }
 }

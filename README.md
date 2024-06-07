@@ -19,4 +19,6 @@ npm add -D sass
 
 <img alt="01.png" src="https://github.com/nomadcoders/css-layout-masterclass/blob/bc25f351f5a9c5e43e399f3cfbd5c21f6a39ce50/projects/01.png?raw=true" data-hpc="true" class="Box-sc-g0xbh4-0 kzRgrI">
 
+https://dribbble.com/shots/19526780-Education-Courses-App
+
 [결과물]
