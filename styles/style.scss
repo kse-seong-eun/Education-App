@@ -1,102 +1,129 @@
-@mixin menuBtn($bgColor, $borderColor, $fontColor) {
-  background-color: $bgColor;
-  border: 1px solid $borderColor;
-
-  border-radius: 20px;
-  height: 30px;
-  max-width: 300px;
-  min-width: 30px;
-  flex: 1 1 auto;
-  // flex-grow, flex-shrink, flex-basis
-  margin-left: 10px;
-  margin-bottom: 10px;
-  line-height: 2.8;
-  text-align: center;
-  overflow: hidden;
-  white-space: nowrap;
-  font-size: 11px;
-  font-weight: 600;
-  color: $fontColor;
-  @content;
-}
-@mixin articleBox($bgColor, $borderColor) {
-  font-family: "Libre Baskerville", serif;
-  background-color: $bgColor;
-  border: 1px solid $borderColor;
-  position: relative;
-  box-sizing: border-box;
-  border-radius: 20px;
-  width: 180px;
-  height: 180px;
-  padding: 15px;
-  margin: 5px;
-  font-size: 24px;
-  @content;
-}
-
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-
-  font-weight: 400;
-  // color: rgba(255, 255, 255, 0.87);
-  // background-color: #242424;
+  font-weight: 300;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+@mixin menuBtn($bgColor, $borderColor, $fontColor) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+  flex: 1 0 auto;
+  // flex-grow, flex-shrink, flex-basis
+  padding: 5px 15px;
+  background-color: $bgColor;
+  border: 0.5px solid $borderColor;
+  border-radius: 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 400;
+  color: $fontColor;
+  @content;
+}
+@mixin articleBox($bgColor, $borderColor, $fontColor) {
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 20px;
+  height: 180px;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  background-color: $bgColor;
+  border: 0.5px solid $borderColor;
+  font-size: 26px;
+  font-family: "Libre Baskerville", serif;
+  font-weight: 300;
+  line-height: 1.3;
+  color: $fontColor;
+
+  @content;
+}
+@mixin articleBoxInfo($bgColor, $borderColor, $fontColor) {
+  font-size: 11px;
+  height: fit-content;
+  padding: 8px 10px;
+  border-radius: 20px;
+  border: 1px solid $borderColor;
+  background-color: $bgColor;
+  color: $fontColor;
+  @content;
+}
+
 body {
   padding: 0px;
   margin: 0;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .backGround {
   position: relative;
   width: 390px;
-  height: 844px;
+  height: 150vh;
+  background-color: #000000;
+
+  // overflow: scroll;
+  // overflow: hidden;
   .menu {
     position: sticky;
     top: 0;
     left: 0;
-    // width: 100%;
+    z-index: 1;
     display: flex;
-    justify-content: space-between;
-    align-items: 140px;
-    flex-wrap: wrap;
-    overflow: hidden;
-    padding: 10px 0;
-
-    background-color: rgb(0, 47, 255);
+    gap: 5px;
+    padding: 10px;
+    overflow-x: scroll; /* 수평 스크롤 */
+    overflow-y: hidden; /* 수직 스크롤 비활성화 */
+    background-color: #000000;
+    &::-webkit-scrollbar {
+      display: none;
+    }
     .menu__button {
       @include menuBtn(#000000, #ffffff, #ffffff);
+      &:first-of-type {
+        padding: 0 15px;
+        height: auto;
+      }
+      &:hover {
+        @include menuBtn(#ffffff, #000000, #000000);
+      }
     }
   }
   .article {
     position: absolute;
-    top: 50px;
-    display: grid;
+    top: 60px;
     width: 100%;
-    grid-template-columns: repeat(2, 1fr);
+    display: grid;
+    row-gap: 10px;
+    column-gap: 10px;
+    grid-template-columns: repeat(2, 180px);
     grid-auto-flow: row;
-    background-color: rgb(66, 255, 132);
+    justify-content: center;
+    &::-webkit-scrollbar {
+      display: none;
+    }
     .article__box {
-      @include articleBox(#0a6846, #ffffff);
-      .article__box__bottom {
+      @include articleBox(#292d34, #ffffff, white);
+      &:nth-child(3) {
+        grid-column: span 2;
+        font-size: 32px;
+      }
+      .article__box--bottom {
         position: absolute;
         bottom: 15px;
-        width: 148px;
+        width: 90%;
         display: flex;
         justify-content: space-between;
-        background-color: rgb(173, 54, 54);
-        // box-sizing: border-box;
-        .article__box__info {
-          font-size: 12px;
-          height: fit-content;
-          padding: 10px;
-          // box-sizing: border-box;
-          border-radius: 20px;
-          border: 1px solid black;
-          background-color: lightcoral;
+        align-items: center;
+        .article__box--info {
+          @include articleBoxInfo(#ffdd2d, #000000, #000000) {
+          }
         }
       }
     }
