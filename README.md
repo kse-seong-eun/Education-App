@@ -22,3 +22,4 @@ npm add -D sass
 https://dribbble.com/shots/19526780-Education-Courses-App
 
 [결과물]
+![ezgif-4-39f9ff62d9](https://github.com/kse-seong-eun/Education-App/assets/66905959/d4b0ca9c-1b8f-47e2-b954-278f9352acc1)
