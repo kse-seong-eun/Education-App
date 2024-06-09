@@ -1,5 +1,6 @@
+@import "./reset.scss";
+
 :root {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: 400;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -7,15 +8,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-@mixin menuBtn($bgColor, $borderColor, $fontColor) {
-  display: inline-flex;
+@mixin headerListItems($borderColor, $fontColor) {
+  display: flex;
   align-items: center;
   justify-content: center;
   height: 26px;
   flex: 1 0 auto;
   // flex-grow, flex-shrink, flex-basis
-  padding: 5px 18px;
-  background-color: $bgColor;
+  padding: 5px 10px;
   border: 0.5px solid $borderColor;
   border-radius: 20px;
   overflow: hidden;
@@ -24,163 +24,158 @@
   color: $fontColor;
   @content;
 }
-@mixin articleBox($bgColor, $borderColor, $fontColor) {
+@mixin articleStyle($bgColor, $borderColor, $fontColor) {
   position: relative;
   box-sizing: border-box;
-  border-radius: 20px;
   height: 180px;
   padding: 15px;
-  display: flex;
-  justify-content: center;
   background-color: $bgColor;
   border: 0.7px solid $borderColor;
-  font-size: 26px;
-  font-family: "Libre Baskerville", serif;
-  line-height: 1.3;
+  border-radius: 20px;
   color: $fontColor;
+
   @content;
 }
-@mixin articleBoxInfo($bgColor, $borderColor, $fontColor) {
+@mixin articleFooter($bgColor, $borderColor, $fontColor) {
   padding: 7px 10px;
   border-radius: 20px;
   border: 1px solid $borderColor;
   background-color: $bgColor;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: $fontColor;
   font-weight: 600;
   font-size: 10px;
-  color: $fontColor;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   @content;
 }
 
 body {
-  padding: 0px;
-  margin: 0;
   background-color: #000000;
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: cetner;
 }
 
-.backGround {
+.phone {
   position: relative;
   width: 390px;
   height: 135vh;
-  // margin-left: 25vw;
   background-color: #000000;
-  .menu {
+  .header {
     position: sticky;
     top: 0;
     left: 0;
     z-index: 1;
-    display: flex;
-    gap: 10px;
-    padding: 10px;
     overflow-x: scroll;
-    background-color: #000000;
     &::-webkit-scrollbar {
       display: none;
     }
-    .menu__button {
-      @include menuBtn(#000000, #ffffff, #ffffff);
-      &:first-of-type {
-        padding: 0 10px;
-        height: auto;
-        &:hover {
-          @include menuBtn(#ffffff, #000000, #000000);
-          padding: 0 10px;
+    .header__list {
+      padding: 10px;
+      width: max-content;
+      display: flex;
+      gap: 10px;
+      background-color: #000000;
+      .header__list--item {
+        @include headerListItems(#e4e4e4, #e4e4e4);
+        &:first-of-type {
           height: auto;
+          background-color: white;
+          color: black;
         }
-      }
-      &:hover {
-        @include menuBtn(#ffffff, #000000, #000000);
+        &:hover {
+          @include headerListItems(#000000, #000000);
+          background-color: white;
+          color: black;
+        }
       }
     }
   }
-  .article {
-    position: absolute;
-    top: 65px;
+  .articles {
+    position: relative;
     width: 100%;
     display: grid;
-    row-gap: 10px;
-    column-gap: 10px;
+    gap: 10px;
     grid-template-columns: repeat(2, 180px);
     grid-auto-flow: row;
     justify-content: center;
-    &::-webkit-scrollbar {
-      display: none;
-    }
-    .article__box {
-      @include articleBox(#292d34, #ffffff, #e4e4e4);
+    font-size: 26px;
+    font-family: "Libre Baskerville", serif;
+    line-height: 1.3;
+    .article {
+      @include articleStyle(#292d34, #e4e4e4, #e4e4e4);
       transition: filter 0.3s ease;
-      &:nth-child(2) {
-        @include articleBox(#ffffff, #000000, #000000);
-      }
-      &:nth-child(3) {
-        @include articleBox(#fafdc1, #000000, #000000);
-        grid-column: span 2;
-        font-size: 32px;
-      }
-      &:nth-child(4) {
-        @include articleBox(#b7a4f8, #000000, #000000);
-      }
-      &:nth-child(5) {
-        @include articleBox(#ffd3d3, #000000, #000000);
-      }
-      &:nth-child(6) {
-        @include articleBox(#cffedd, #000000, #000000);
-        grid-column: span 2;
-        font-size: 32px;
-      }
-      &:nth-child(even) {
-        .article__box--info:first-child {
-          @include articleBoxInfo(#ffdd2d, #000000, #000000);
-        }
-      }
-      &:nth-child(odd) {
-        .article__box--info:first-child {
-          @include articleBoxInfo(#e9affc, #000000, #000000);
-        }
-      }
-      &:hover {
-        filter: brightness(1.2) contrast(150%);
-        box-shadow: 0 0 10px #e4e4e467;
-      }
-      .article__box--bottomBar {
-        position: absolute;
-        bottom: 18px;
-        width: 83%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        font-size: 16px;
-        line-height: 0.01;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-        .article__box--charge {
-          position: absolute;
-          z-index: 1;
-          top: 32px;
-          height: 6px;
-          width: 63%;
-          border-radius: 5px 0 0 5px;
-          background-color: #ffffff;
-        }
-        .article__box--bar {
-          height: 6px;
-          width: 100%;
-          border-radius: 5px;
-          background-color: #616161;
-        }
-      }
-      .article__box--bottom {
+      .article__footer {
         position: absolute;
         bottom: 12px;
         width: 90%;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        .article__box--info {
-          @include articleBoxInfo(#ffffff, #000000, #000000);
+        font-size: 16px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        .article__info {
+          @include articleFooter(#e4e4e4, #000000, #000000);
         }
+      }
+      &:first-child {
+        .article__footer {
+          bottom: 22px;
+          width: 80%;
+          justify-content: start;
+          .article__num {
+            position: absolute;
+            bottom: 10px;
+            z-index: 1;
+            bottom: 10px;
+          }
+          .article__bar {
+            height: 6px;
+            width: 100%;
+            border-radius: 5px;
+            background-color: #616161;
+          }
+          .article__charge {
+            position: absolute;
+            z-index: 1;
+            height: 6px;
+            width: 63%;
+            border-radius: 5px 0 0 5px;
+            background-color: #e4e4e4;
+          }
+        }
+      }
+      &:nth-child(2) {
+        @include articleStyle(#e4e4e4, #000000, #000000);
+      }
+      &:nth-child(3) {
+        @include articleStyle(#fafdc1, #000000, #000000);
+      }
+      &:nth-child(4) {
+        @include articleStyle(#b7a4f8, #000000, #000000);
+      }
+      &:nth-child(5) {
+        @include articleStyle(#ffd3d3, #000000, #000000);
+      }
+      &:nth-child(6) {
+        @include articleStyle(#cffedd, #000000, #000000);
+      }
+      &:nth-child(3n) {
+        grid-column: span 2;
+        font-size: 32px;
+      }
+      &:nth-child(even) {
+        .article__info:first-child {
+          @include articleFooter(#ffdd2d, #000000, #000000);
+        }
+      }
+      &:nth-child(odd) {
+        .article__info:first-child {
+          @include articleFooter(#e9affc, #000000, #000000);
+        }
+      }
+      &:hover {
+        filter: brightness(1.2) contrast(150%);
+        box-shadow: 0 0 10px #e4e4e467;
       }
     }
   }
